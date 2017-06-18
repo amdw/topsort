@@ -57,7 +57,8 @@
 
 ; test.check generator for random graph.
 (def gen-graph
-  (let [gen-order (gen/not-empty (gen/fmap (comp shuffle range inc) gen/nat))
+  (let [gen-ordinals (gen/not-empty (gen/fmap (comp shuffle range inc) gen/nat))
+        gen-order (gen/fmap #(map (comp keyword str char (partial + 97)) %) gen-ordinals)
         ; Graph nodes are simply integers from 0 to n
         dep-candidates (fn [order node] (take-while #(not= node %) order))
         ; Each node is allowed to depend on nodes *ahead* of it in the sequence
