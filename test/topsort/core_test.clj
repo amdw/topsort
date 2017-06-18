@@ -45,7 +45,8 @@
       (is (valid-topsort? graph (topsort graph))))))
 
 (deftest topsort-cycle
-  (doseq [cyclic-graph [{:a [:b] :b [:a]}
+  (doseq [cyclic-graph [{:a [:a]}
+                        {:a [:b] :b [:a]}
                         {:a [:b] :b [:c] :c [:a]}
                         {:a [:b :c] :b [:z] :c [:d :e] :d [:e] :e [:c]}]]
     (testing (str "Test cyclic exception for " cyclic-graph)
